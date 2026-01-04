@@ -54,7 +54,26 @@ Rebuild the Go binary and start the infrastructure containers:
 docker-compose up --build
 ```
 
-### 3. Database Access (TablePlus)
+### 3. Running Tests
+This project implements a "Testing Pyramid" including Unit, HTTP, and Integration tests. Integration tests require an isolated database.
+
+#### A. Start the Test Database Run the dedicated test container (mapped to port 5436 to avoid conflicts with development):
+
+```bash
+docker-compose up -d test_db
+```
+
+#### B. Run All Tests Execute the full test suite from the root directory:
+
+```bash
+go test -v ./...
+```
+
+- ***Unit Tests***: Validate business logic (Service layer) using mocks.
+- ***HTTP Tests***: Validate API endpoints and JSON encoding (Handler layer).
+- ***Integration Tests***: Validate real SQL queries against the test_db (Repository layer).
+
+### 4. Database Access (TablePlus)
 
 To retrieve the `email_code` for manual verification testing, use the following connection details:
 
