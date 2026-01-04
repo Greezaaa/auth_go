@@ -17,7 +17,6 @@ func NewHandler(s *Service, l *log.Logger) *Handler {
 	return &Handler{service: s, logger: l}
 }
 
-// Routes defines the sub-router for /users
 func (h *Handler) Routes() chi.Router {
 	r := chi.NewRouter()
 	r.Post("/register", h.Register)

@@ -10,12 +10,19 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+type UserRepository interface {
+	Create(ctx context.Context, u *User) error
+	GetByID(ctx context.Context, id uuid.UUID) (*User, error)
+	GetAll(ctx context.Context) ([]User, error)
+	VerifyEmail(ctx context.Context, email string, code string) error
+}
+
 type Service struct {
-	repo   *Repository
+	repo   UserRepository
 	logger *log.Logger
 }
 
-func NewService(repo *Repository, logger *log.Logger) *Service {
+func NewService(repo UserRepository, logger *log.Logger) *Service {
 	return &Service{repo: repo, logger: logger}
 }
 
