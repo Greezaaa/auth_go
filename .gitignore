@@ -7,3 +7,15 @@
 tmp/
 temp/
 
+# macOS junk
+.DS_Store
+
+# Go binaries
+auth-go
+bin/
+
+# Environment variables (Crucial for security!)
+.env
+
+# Docker
+postgres_data/
